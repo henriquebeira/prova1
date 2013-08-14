@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                template="./WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="styles">
+        <link href="./css/default.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+                /* Important required because row */
+                .ui-datatable-odd {
+                    background-color:lightgray !important;
+                    background-position-y: -1400px; /* IE7 hack */
+                }
+            </style>
+    </ui:define>
+
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="titulo-form">EDIÇÃO</div>
+            <h:panelGroup style="text-align: center; margin-bottom: 10px;" layout="block">                
+                <ace:dataTable id="candidatoTable"
+                               value="#{edicaoBean.candidatoDataModel}"
+                               var="candidato"
+                               paginator="true"
+                               paginatorPosition="bottom"
+                               rows="10">
+                    <ace:column id="cpf" headerText="CPF" sortBy="#{candidato.cpf}">
+                        <h:outputText id="cpfCell" value="#{candidato.cpf}"/>
+                    </ace:column>
+                    <ace:column id="nome" headerText="Nome" sortBy="#{candidato.nome}">
+                        <h:outputText id="nomeCell" value="#{candidato.nome}"/>
+                    </ace:column>
+                    <ace:column id="editar" headerText="Editar">
+                        <ice:commandButton value="Editar" action="#{edicaoBean.editarAction}"/>
+                    </ace:column>
+                    <ace:column id="excluir" headerText="Excluir">
+                        <ice:commandButton value="Excluir" action="#{edicaoBean.excluirAction}"/>
+                    </ace:column>
+                </ace:dataTable>
+            </h:panelGroup>
+            <a style="float: right" href="/inscricao-jsf-2/inicio.xhtml">Página Inicial</a>
+            <h:messages/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

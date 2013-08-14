@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                template="./WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="styles">
+        <link href="./css/inscricao.css" rel="stylesheet" type="text/css" />
+    </ui:define>
+
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+    <ui:define name="content">
+        <ice:form>
+            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
+                <ice:panelGroup>
+                    <ice:outputLabel for="cnpj" value="CNPJ"/>
+                    <ace:maskedEntry id="cnpj" value="#{inscricaoBean.candidato.cnpj}"  mask="99.999.999/9999-99"
+                                     label="CNPJ" size="15" required="true">
+                        <f:validator validatorId="CNPJValidator"/>
+                        <f:converter converterId="CNPJConverter"/>
+                    </ace:maskedEntry>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="razao" value="Razão Social"/>
+                    <ice:inputText id="razao" value="#{inscricaoBean.candidato.razao}" size="50"
+                                   styleClass="ui-inputfield" label="Razão Social" maxlength="50" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="fantasia" value="Nome Fantasia"/>
+                    <ice:inputText id="fantasia" value="#{inscricaoBean.candidato.fantasia}" size="50"
+                                   styleClass="ui-inputfield" label="Nome Fantasia" maxlength="50" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="endereco" value="Endereço"/>
+                    <ice:inputText id="endereco" value="#{inscricaoBean.candidato.endereco}" size="50"
+                                   styleClass="ui-inputfield" label="Endereço" maxlength="50" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="cidade" value="Cidade"/>
+                    <ice:inputText id="cidade" value="#{inscricaoBean.candidato.cidade}" size="30"
+                                   styleClass="ui-inputfield" label="cidade" maxlength="30" required="true"/>
+                    <ice:outputLabel for="estado" value="Estado"/>
+                    <h:selectOneMenu id="estado" value="#{inscricaoBean.candidato.estado.codigo}" style="width:12em">
+                        <f:selectItems value="#{inscricaoBean.estadoItemList}"/>
+                    </h:selectOneMenu>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="regiao" value="Região de atuação"/>
+                    <h:selectOneMenu id="regiao" value="#{inscricaoBean.candidato.regiao.codigo}" style="width:12em">
+                        <f:selectItems value="#{inscricaoBean.regiaoItemList}"/>
+                    </h:selectOneMenu>
+                    <ice:outputLabel for="estado2" value="   Estado"/>
+                    <h:selectOneMenu id="estado2" value="#{inscricaoBean.candidato.estado2.codigo}" style="width:12em">
+                        <f:selectItems value="#{inscricaoBean.estado2ItemList}"/>
+                    </h:selectOneMenu>
+                </ice:panelGroup>
+
+
+            </ice:panelGroup>
+
+            <ice:commandButton value="#{inscricaoBean.valorConfirmar}" action="#{inscricaoBean.confirmaAction}" style="margin-top: 1em"/>
+            <ice:messages/>
+        </ice:form>
+    </ui:define>
+
+</ui:composition>
